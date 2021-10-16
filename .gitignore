@@ -1,3 +1,6 @@
 node_modules/*
 mysql_data/*
 .mysql_data/*
+src/cert/*
+.vscode/settings.json
+.env

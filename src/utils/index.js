@@ -9,6 +9,13 @@ const jwtToken = {
       { expiresIn: '24h' },
     );
   },
+  createPasswordToken({ id, email }) {
+    return jwt.sign(
+      { userId: id, email },
+      process.env.JWT_SECRET,
+      { expiresIn: '1h' },
+    );
+  },
   verifyToken(headerJwt) {
     try {
       const token = headerJwt.split(' ')[1];

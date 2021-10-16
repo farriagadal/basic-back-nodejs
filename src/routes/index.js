@@ -1,14 +1,19 @@
 const express = require('express');
 
-const { room, auth } = require('../controllers');
+const { room, auth, user } = require('../controllers');
 
 const router = express.Router();
 
-router.post('/sign-up', auth.signUp);
 router.post('/login', auth.signIn);
+router.post('/sign-up', auth.signUp);
 router.get('/verify-email', auth.verifyEmailToken);
 router.post('/resend-email', auth.resendEmail);
 router.get('/verify-session', auth.verifySessionToken);
+
+router.post('/recovery-password', user.recoveryPassword);
+router.post('/change-password', user.changeRecoveryPassword);
+router.put('/profile', user.updateProfile);
+router.put('/profile/password', user.updatePassword);
 
 // get all user
 // router.get('/users', users.getUsers)

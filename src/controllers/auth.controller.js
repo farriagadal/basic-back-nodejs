@@ -64,6 +64,17 @@ const auth = {
       const user = await models.User.findOne({ where: { email } });
       if (user && comparePassword(password, user.password)) {
         const { id, firstName, lastName } = user;
+        if (!user.isVerified) {
+          return res.status(400).send({
+            error: {
+              message: 'User no Verified',
+              emailInvalid: true,
+            },
+            user: {
+              id, firstName, lastName, email,
+            },
+          });
+        }
         const token = jwtToken.createToken(user);
         return res.status(200).send({
           token,

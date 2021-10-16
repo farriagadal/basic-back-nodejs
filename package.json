@@ -4,6 +4,8 @@
   "description": "",
   "main": "src/app.js",
   "scripts": {
+    "prod": "node src/app.js",
+    "start": "nodemon src/app.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore ."
   },

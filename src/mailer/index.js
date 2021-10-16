@@ -17,9 +17,9 @@ const transporter = nodemailer.createTransport({
 //   service: 'gmail',
 //   auth: {
 //     user: 'neokey23@gmail.com',
-//     pass: 'Neokey2323a'
-//   }
-// })
+//     pass: 'Neokey2323a',
+//   },
+// });
 
 const email = new Email({
   transport: transporter,
@@ -50,6 +50,22 @@ const sendConfirmationEmail = (emailOptions) => {
   }).then(() => console.log('email has been sent!'));
 };
 
+const sendPasswordRecoveryEmail = (emailOptions) => {
+  email.send({
+    template: 'password-recovery',
+    message: {
+      from: 'youremail@gmail.com',
+      to: emailOptions.email,
+    },
+    locals: {
+      fname: emailOptions.firstName,
+      lname: emailOptions.lastName,
+      url_redirect: `${process.env.WEB_URL}/recovery-password?token=${emailOptions.emailToken}`,
+    },
+  }).then(() => console.log('email has been sent!'));
+};
+
 module.exports = {
   sendConfirmationEmail,
+  sendPasswordRecoveryEmail,
 };
